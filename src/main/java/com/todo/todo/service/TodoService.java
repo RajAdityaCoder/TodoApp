@@ -46,7 +46,8 @@ public class TodoService {
         }
         return todo;
     }
-    public void deleteBulkTodos(List<String> ids){
-        todoList.removeIf(t -> ids.contains(t.getId()));
+    public void deleteBulkTodos(List<TodoModel> todo){
+        todoList.removeIf(t -> todo.contains(t));
     }
+
 }
