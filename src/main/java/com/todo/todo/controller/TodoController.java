@@ -40,7 +40,7 @@ public class TodoController {
 
     @DeleteMapping("/{id}")
     public String deleteTodo(@PathVariable Long id){
-        todoService.deleteTodo(id);
+        todoService.deleteTodo(id.toString());
         return "Todo Deleted Successfully";
     }
 
