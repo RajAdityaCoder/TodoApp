@@ -1,44 +1,39 @@
 package com.todo.todo.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.todo.todo.model.TodoModel;
+import com.todo.todo.repository.TodoRepository;
 
 @Service
 public class TodoService {
     
-    private List<TodoModel> todoList = new ArrayList<>();
+    @Autowired
+    private TodoRepository todoRepository;
 
     public TodoModel createTodo(TodoModel todo) {
-        todoList.add(todo);
-        return todo;
+        return todoRepository.save(todo);
     }
 
     
     public List<TodoModel> getList() {
-        return todoList;
+        return todoRepository.findAll();
     }
 
     public TodoModel updateTodo(TodoModel todo) {
-        for (int i = 0; i < todoList.size(); i++) {
-            if (todoList.get(i).getId().equals(todo.getId())) {
-                todoList.set(i, todo);
-                return todo;
-            }
-        }
-        return null;
+        return todoRepository.save(todo);
     }
 
     public void deleteTodo(Long id) {
-        todoList.removeIf(t -> t.getId().equals(id));
+        todoRepository.deleteById(id);
     }
 
     public List<TodoModel> createBulkTodos(List<TodoModel> todo){
-        todoList.addAll(todo);
-        return todoList;
+        todoRepository.saveAll(todo);
+        return todo;
     }
     public List<TodoModel> updateBulkTodos(List<TodoModel> todo){
         for (TodoModel todoModel : todo) {
@@ -47,7 +42,7 @@ public class TodoService {
         return todo;
     }
     public void deleteBulkTodos(List<TodoModel> todo){
-        todoList.removeIf(t -> todo.contains(t));
+        todoRepository.deleteAll(todo);
     }
 
 }
