@@ -1,6 +1,13 @@
 package com.todo.todo.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "todos")
 public class TodoModel {
+    @Id
     private String id;
     private String content;
 
